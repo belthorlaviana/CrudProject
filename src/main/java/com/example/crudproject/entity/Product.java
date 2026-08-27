@@ -15,9 +15,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ⚠️ @ManyToOne es EAGER por defecto en JPA: cargar un producto
-    // dispara también la carga de su categoría (y ésta, con su EAGER
-    // mal puesto, la de todos los productos hermanos...).
+    /**
+     * muchos productos pertenecen a 1 categoria
+     * el joinclumn ye pa que
+     */
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
@@ -28,7 +29,7 @@ public class Product {
     @Column(nullable = false, length = 200)
     private String name;
 
-    // Columna pesada: en los labs veremos cómo evitar traerla siempre (over-fetching)
+    @Column(nullable = false, length = 200)
     private String description;
 
     @Column(nullable = false, precision = 12, scale = 2)
@@ -40,6 +41,11 @@ public class Product {
     @Column(nullable = false)
     private Boolean active;
 
+    /**
+     * para auditoria de base de datos, este campo ni se puede insertar, ni alterar, ni actualizar, el valor debe de insertarse de forma automatica cuando se haga un insert, para ello despues de arrancar la app para que se hibernate cree la base de
+     * datos con todos sus campos debemos actualizar la base de datos con el script que aparece en schema.sql
+     *
+     */
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false)
     private Instant createdAt;
 }

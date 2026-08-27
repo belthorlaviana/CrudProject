@@ -8,18 +8,25 @@ spring:
       maximum-pool-size: 10
 
   jpa:
+    defer-datasource-initialization: false
     hibernate:
-      ddl-auto: none
+      #ddl-auto: none         #No crea ni actualiza tablas automáticamente. Asume que la BD ya está creada.
+      #ddl-auto: create       #Crea las tablas cada vez que arranca la aplicación. #⚠️ Borra tolo que hubiera antes.
+      #ddl-auto: create-drop  #Igual que create, pero además borra las tablas al apagar la aplicación.
+      ddl-auto: update        #Crea las tablas si no existen y actualiza el esquema sin borrar datos. Es la opción más cómoda mientras desarrollas.
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
         show_sql: true
         generate_statistics: true
-
+  # Si quieres que Spring Boot ejecute automáticamente schema.sql y data.sql al arrancar, la propiedad clave es esta:
+  # jecutar siempre schema.sql y data.sql
+  # Si tienes JPA activado (y tú lo tienes), debes añadir: spring.jpa.defer-datasource-initialization: true
+  # Esto permite que los scripts SQL se ejecuten antes de que Hibernate empiece a trabajar, evitando que Hibernate bloquee la inicialización.
   sql:
     init:
-      mode: always
+      mode: never
 
 logging:
   level:
@@ -30,3 +37,4 @@ logging:
 
 server:
   port: 8080
+
