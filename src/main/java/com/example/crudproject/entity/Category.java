@@ -7,6 +7,9 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entidad JPA que representa una categoría y los productos asociados.
+ */
 @Data
 @Entity
 @Table(name = "category")

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementa la lógica de negocio para las operaciones de productos.
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 

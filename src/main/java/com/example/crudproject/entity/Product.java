@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 
+/**
+ * Entidad JPA que representa un producto y su relación con una categoría.
+ */
 @Data
 @Entity
 @Table(name = "product")

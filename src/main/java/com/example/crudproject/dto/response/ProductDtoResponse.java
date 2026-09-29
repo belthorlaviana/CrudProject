@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * Datos de producto expuestos en las respuestas de la API.
+ */
 @Data
 public class ProductDtoResponse {
 

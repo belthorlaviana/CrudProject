@@ -5,6 +5,9 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 
+/**
+ * Datos recibidos en las solicitudes para crear o actualizar un producto.
+ */
 @Data
 public class ProductDtoRequest {
 

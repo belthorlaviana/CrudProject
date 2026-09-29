@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Expone los endpoints REST para gestionar productos.
+ */
 @RestController
 @RequestMapping("/api/products")
 @Tag(name = "Products", description = "API para la gestión de productos")
@@ -23,11 +26,21 @@ public class ProductController {
 
     private final ProductService productService;
 
+    /**
+     * Instantiates a new Product controller.
+     *
+     * @param productService the product service
+     */
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    //ESTI ENDPOINT TA FECHU ENTERU
+    /**
+     * Create response entity.
+     *
+     * @param product the product
+     * @return the response entity
+     */
     @Operation(summary = "Crear un producto", description = "Crea un nuevo producto en la base de datos")
     @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Producto creado correctamente"), @ApiResponse(responseCode = "400", description = "Datos del producto incorrectos", content = @Content)})
     @PostMapping
@@ -38,7 +51,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    //ESTI ENDPOINT TA FECHU ENTERU
+    /**
+     * Find all response entity.
+     *
+     * @return the response entity
+     */
     @Operation(summary = "Obtener todos los productos", description = "Obtiene la lista completa de productos")
     @ApiResponse(responseCode = "200", description = "Lista de productos obtenida correctamente")
     @GetMapping
@@ -47,7 +64,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    //ESTI ENDPOINT TA FECHU ENTERU
+    /**
+     * Find by id response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @Operation(summary = "Obtener un producto por ID", description = "Busca un producto utilizando su identificador")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Producto encontrado"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
     @GetMapping("/{id}")
@@ -58,6 +80,13 @@ public class ProductController {
         return ResponseEntity.ok(productService.findById(id));
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param id         the id
+     * @param productDto the product dto
+     * @return the response entity
+     */
     @Operation(summary = "Actualizar un producto", description = "Actualiza los datos de un producto existente")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Producto actualizado correctamente"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content), @ApiResponse(responseCode = "400", description = "Datos incorrectos", content = @Content)})
     @PutMapping("/{id}")
@@ -67,6 +96,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.update(id, productDto));
     }
 
+    /**
+     * Delete response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @Operation(summary = "Eliminar un producto", description = "Elimina un producto de la base de datos")
     @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "Producto eliminado correctamente"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
     @DeleteMapping("/{id}")
