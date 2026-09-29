@@ -2,7 +2,6 @@ package com.example.crudproject.service;
 
 import com.example.crudproject.dto.request.ProductDtoRequest;
 import com.example.crudproject.dto.response.ProductDtoResponse;
-import com.example.crudproject.entity.Product;
 
 import java.util.List;
 
@@ -15,9 +14,9 @@ public interface ProductService {
      * Create product.
      *
      * @param product the product
-     * @return the product
+     * @return the created product
      */
-    Product create(ProductDtoRequest product);
+    ProductDtoResponse create(ProductDtoRequest product);
 
     /**
      * Find all list.
@@ -39,9 +38,9 @@ public interface ProductService {
      *
      * @param id         the id
      * @param productDto the product dto
-     * @return the product
+     * @return the updated product
      */
-    Product update(Long id, ProductDtoRequest productDto);
+    ProductDtoResponse update(Long id, ProductDtoRequest productDto);
 
     /**
      * Delete.

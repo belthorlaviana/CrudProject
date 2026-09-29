@@ -22,6 +22,8 @@ public interface ProductMapper {
      * @return the product
      */
     @Mapping(target = "category", source = "category")
+    @Mapping(target = "name", source = "productDto.name")
+    @Mapping(target = "description", source = "productDto.description")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     Product toEntity(ProductDtoRequest productDto, Category category);
@@ -32,7 +34,7 @@ public interface ProductMapper {
      * @param product the product
      * @return the product dto response
      */
-    @Mapping(target = "categoryName", source = "category.name")
+    @Mapping(target = "idCategory", source = "category.id")
     ProductDtoResponse toDto(Product product);
 
     /**
@@ -41,8 +43,6 @@ public interface ProductMapper {
      * @param productDtoRequest the product dto request
      * @param product           the product
      */
-    @Mapping(target = "name", source = "productDtoName")
-    @Mapping(target = "description", source = "productDtoDescription")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "category", ignore = true)
     @Mapping(target = "createdAt", ignore = true)

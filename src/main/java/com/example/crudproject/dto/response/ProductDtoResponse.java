@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Data
 public class ProductDtoResponse {
 
-    private String categoryName;
+    private Long idCategory;
 
     private String sku;
 
@@ -21,4 +21,6 @@ public class ProductDtoResponse {
     private BigDecimal price;
 
     private Integer stock;
+
+    private Boolean active;
 }

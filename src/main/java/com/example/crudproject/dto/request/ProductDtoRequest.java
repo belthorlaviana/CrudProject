@@ -15,9 +15,9 @@ public class ProductDtoRequest {
 
     private String sku;
 
-    private String ProductDtoName;
+    private String name;
 
-    private String ProductDtoDescription;
+    private String description;
 
     private BigDecimal price;
 
