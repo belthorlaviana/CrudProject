@@ -2,6 +2,7 @@ package com.example.crudproject.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +26,6 @@ public class Category {
      * una categoria puede tener varios productos
      */
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    @ToString.Exclude
     private List<Product> products = new ArrayList<>();
 }

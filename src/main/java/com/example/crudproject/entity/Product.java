@@ -17,7 +17,7 @@ public class Product {
 
     /**
      * muchos productos pertenecen a 1 categoria
-     * el joinclumn ye pa que
+     * el joinclumn, basicamnete ye pa crear la clave ajena en la tabla product, que tendrá elnombre de "category_id"
      */
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
@@ -26,7 +26,7 @@ public class Product {
     @Column(nullable = false, length = 30)
     private String sku;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 200, unique = true)
     private String name;
 
     @Column(nullable = false, length = 200)
