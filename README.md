@@ -23,10 +23,10 @@ private Instant createdAt;
 * Al no ser `insertable` ni `updatable`, el valor debe ser generado por la **base de datos**.
 
 > **Importante:** para que `createdAt` se rellene automáticamente, la columna `created_at` debe tener configurado en la base de datos un valor por defecto, por ejemplo `CURRENT_TIMESTAMP`.
+> habria que ejecutar esta SQL en la base de datos:
 
-```text
-INSERT Product
-      ↓
+```sql
+    ALTER TABLE product ALTER COLUMN created_at SET DEFAULT CURRENT_TIMESTAMP;
 ```
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

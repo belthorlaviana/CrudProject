@@ -2,7 +2,6 @@ package com.example.crudproject.controller;
 
 import com.example.crudproject.dto.request.ProductDtoRequest;
 import com.example.crudproject.dto.response.ProductDtoResponse;
-import com.example.crudproject.entity.Product;
 import com.example.crudproject.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -46,7 +45,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody ProductDtoRequest product) {
 
-        Product createdProduct = productService.create(product);
+        ProductDtoResponse createdProduct = productService.create(product);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -90,8 +89,9 @@ public class ProductController {
     @Operation(summary = "Actualizar un producto", description = "Actualiza los datos de un producto existente")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Producto actualizado correctamente"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content), @ApiResponse(responseCode = "400", description = "Datos incorrectos", content = @Content)})
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id,
-                                          @RequestBody ProductDtoRequest productDto) {
+    public ResponseEntity<ProductDtoResponse> update(
+            @Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id,
+            @RequestBody ProductDtoRequest productDto) {
 
         return ResponseEntity.ok(productService.update(id, productDto));
     }
