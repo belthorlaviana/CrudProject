@@ -41,7 +41,9 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Crear un producto", description = "Crea un nuevo producto en la base de datos")
-    @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Producto creado correctamente"), @ApiResponse(responseCode = "404", description = "id de la categoria incorrecto", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Producto creado correctamente"),
+            @ApiResponse(responseCode = "404", description = "id de la categoria incorrecto", content = @Content)})
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody ProductDtoRequest product) {
 
@@ -70,11 +72,12 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Obtener un producto por ID", description = "Busca un producto utilizando su identificador")
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Producto encontrado"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Producto encontrado"),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content),
+            @ApiResponse(responseCode = "400", description = "El parámetro 'id' debe ser un valor válido.", content = @Content)})
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDtoResponse> findById(
-
-            @Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id) {
+    public ResponseEntity<ProductDtoResponse> findById(@Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id) {
 
         return ResponseEntity.ok(productService.findById(id));
     }
@@ -87,7 +90,10 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Actualizar un producto", description = "Actualiza los datos de un producto existente")
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Producto actualizado correctamente"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content), @ApiResponse(responseCode = "400", description = "Datos incorrectos", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Producto actualizado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Datos incorrectos", content = @Content)})
     @PutMapping("/{id}")
     public ResponseEntity<ProductDtoResponse> update(
             @Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id,
