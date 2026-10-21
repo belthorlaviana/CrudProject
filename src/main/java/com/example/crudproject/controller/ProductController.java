@@ -41,7 +41,7 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Crear un producto", description = "Crea un nuevo producto en la base de datos")
-    @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Producto creado correctamente"), @ApiResponse(responseCode = "400", description = "Datos del producto incorrectos", content = @Content)})
+    @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Producto creado correctamente"), @ApiResponse(responseCode = "404", description = "id de la categoria incorrecto", content = @Content)})
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody ProductDtoRequest product) {
 
