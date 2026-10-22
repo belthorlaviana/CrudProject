@@ -1,4 +1,9 @@
-#  DUDES Y EXPLICACIONES SOBRE EL CODIGO
+#  APLICACION EJEMPLO CRUD
+Ejemplo de proyecto crud, con una base de datos postgress en un contenedor de docker,
+no incluye autorizacion ni authenticación incluye fichero docker -compose.yml para levantar la base de datos y el proyecto spring boot,
+con un script de inicialización de la base de datos. Tambien incluye coleccion postman para probar los endpoints del proyecto. incluye scripts de base de datos.
+
+DUDES Y EXPLICACIONES SOBRE EL CODIGO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 1 Campo `createdAt` del bean `Product`
 Este campo se utiliza para **auditoría**, por lo que no debe poder ser insertado ni actualizado manualmente desde la aplicación.
@@ -23,10 +28,10 @@ private Instant createdAt;
 * Al no ser `insertable` ni `updatable`, el valor debe ser generado por la **base de datos**.
 
 > **Importante:** para que `createdAt` se rellene automáticamente, la columna `created_at` debe tener configurado en la base de datos un valor por defecto, por ejemplo `CURRENT_TIMESTAMP`.
+> habria que ejecutar esta SQL en la base de datos:
 
-```text
-INSERT Product
-      ↓
+```sql
+    ALTER TABLE product ALTER COLUMN created_at SET DEFAULT CURRENT_TIMESTAMP;
 ```
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -2,7 +2,6 @@ package com.example.crudproject.controller;
 
 import com.example.crudproject.dto.request.ProductDtoRequest;
 import com.example.crudproject.dto.response.ProductDtoResponse;
-import com.example.crudproject.entity.Product;
 import com.example.crudproject.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -42,11 +41,13 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Crear un producto", description = "Crea un nuevo producto en la base de datos")
-    @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Producto creado correctamente"), @ApiResponse(responseCode = "400", description = "Datos del producto incorrectos", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Producto creado correctamente"),
+            @ApiResponse(responseCode = "404", description = "id de la categoria incorrecto", content = @Content)})
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody ProductDtoRequest product) {
 
-        Product createdProduct = productService.create(product);
+        ProductDtoResponse createdProduct = productService.create(product);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -71,11 +72,12 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Obtener un producto por ID", description = "Busca un producto utilizando su identificador")
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Producto encontrado"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Producto encontrado"),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content),
+            @ApiResponse(responseCode = "400", description = "El parámetro 'id' debe ser un valor válido.", content = @Content)})
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDtoResponse> findById(
-
-            @Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id) {
+    public ResponseEntity<ProductDtoResponse> findById(@Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id) {
 
         return ResponseEntity.ok(productService.findById(id));
     }
@@ -88,10 +90,14 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Actualizar un producto", description = "Actualiza los datos de un producto existente")
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Producto actualizado correctamente"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content), @ApiResponse(responseCode = "400", description = "Datos incorrectos", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Producto actualizado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Datos incorrectos", content = @Content)})
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id,
-                                          @RequestBody ProductDtoRequest productDto) {
+    public ResponseEntity<ProductDtoResponse> update(
+            @Parameter(description = "ID del producto", example = "1", required = true) @PathVariable Long id,
+            @RequestBody ProductDtoRequest productDto) {
 
         return ResponseEntity.ok(productService.update(id, productDto));
     }
@@ -103,7 +109,9 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Eliminar un producto", description = "Elimina un producto de la base de datos")
-    @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "Producto eliminado correctamente"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Producto eliminado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
 

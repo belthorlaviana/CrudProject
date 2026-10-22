@@ -5,6 +5,7 @@ import com.example.crudproject.dto.request.ProductDtoRequest;
 import com.example.crudproject.dto.response.ProductDtoResponse;
 import com.example.crudproject.entity.Category;
 import com.example.crudproject.entity.Product;
+import com.example.crudproject.exceptions.ProductNotFoundException;
 import com.example.crudproject.mapper.ProductMapper;
 import com.example.crudproject.service.CategoryService;
 import com.example.crudproject.service.ProductService;
@@ -51,22 +52,14 @@ public class ProductServiceImpl implements ProductService {
     public ProductDtoResponse findById(Long id) {
         return productRepository.findById(id)
                 .map(productMapper::toDto)
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Product not found with id: " + id
-                        )
-                );
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @Override
     public ProductDtoResponse update(Long id, ProductDtoRequest productDto) {
 
         Product existingProduct = productRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Product not found with id: " + id
-                        )
-                );
+                .orElseThrow(() -> new ProductNotFoundException(id));
 
         Category category = categoryService.findById(productDto.getIdCategory());
 
@@ -81,9 +74,7 @@ public class ProductServiceImpl implements ProductService {
     public void delete(Long id) {
 
         if (!productRepository.existsById(id)) {
-            throw new RuntimeException(
-                    "Product not found with id: " + id
-            );
+            throw new ProductNotFoundException(id);
         }
 
         productRepository.deleteById(id);

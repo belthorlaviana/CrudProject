@@ -46,7 +46,7 @@ public class Product {
 
     /**
      * para auditoria de base de datos, este campo ni se puede insertar, ni alterar, ni actualizar, el valor debe de insertarse de forma automatica cuando se haga un insert, para ello despues de arrancar la app para que se hibernate cree la base de
-     * datos con todos sus campos debemos actualizar la base de datos con el script que aparece en schema.sql
+     * datos con todos sus campos debemos actualizar la base de datos con el script que aparece en EL README.MD
      *
      */
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false)
