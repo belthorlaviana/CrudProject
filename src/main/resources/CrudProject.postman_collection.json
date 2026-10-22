@@ -1,0 +1,602 @@
+{
+  "info": {
+    "_postman_id": "fac25d04-252c-4b06-9817-933d53a25f0f",
+    "name": "CrudProject",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17661329"
+  },
+  "item": [
+    {
+      "name": "CrudProject",
+      "item": [
+        {
+          "name": "products",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Obtener un producto por ID",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/products/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "products",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1",
+                          "description": "ID del producto"
+                        }
+                      ]
+                    },
+                    "description": "Busca un producto utilizando su identificador"
+                  },
+                  "response": [
+                    {
+                      "name": "Producto encontrado",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/products/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "products",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1",
+                              "description": "ID del producto"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}"
+                    },
+                    {
+                      "name": "Producto no encontrado",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/products/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "products",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1",
+                              "description": "ID del producto"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "name": "Actualizar un producto",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"idCategory\": 1,\n  \"sku\": \"PROD-001\",\n  \"name\": \"Pruebaaaa\",\n  \"description\": \"Prueba descripcion\",\n  \"price\": 79.99,\n  \"stock\": 25,\n  \"active\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/products/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "products",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7000",
+                          "description": "ID del producto"
+                        }
+                      ]
+                    },
+                    "description": "Actualiza los datos de un producto existente"
+                  },
+                  "response": [
+                    {
+                      "name": "Producto actualizado correctamente",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/products/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "products",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1",
+                              "description": "ID del producto"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}"
+                    },
+                    {
+                      "name": "Datos incorrectos",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/products/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "products",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1",
+                              "description": "ID del producto"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    },
+                    {
+                      "name": "Producto no encontrado",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/products/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "products",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1",
+                              "description": "ID del producto"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "name": "Eliminar un producto",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/products/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "products",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "3",
+                          "description": "ID del producto"
+                        }
+                      ]
+                    },
+                    "description": "Elimina un producto de la base de datos"
+                  },
+                  "response": [
+                    {
+                      "name": "Producto eliminado correctamente",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/products/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "products",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1",
+                              "description": "ID del producto"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    },
+                    {
+                      "name": "Producto no encontrado",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/products/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "products",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1",
+                              "description": "ID del producto"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Obtener todos los productos",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "Obtiene la lista completa de productos"
+              },
+              "response": [
+                {
+                  "name": "Lista de productos obtenida correctamente",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/products",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "products"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"id\": 4023,\n    \"category\": {\n      \"id\": 9882,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"products\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    \"sku\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"price\": 4935.216877583542,\n    \"stock\": 4275,\n    \"active\": false,\n    \"createdAt\": \"2026-04-27T04:22:57.824Z\"\n  },\n  {\n    \"id\": 5129,\n    \"category\": {\n      \"id\": 8461,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"products\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    \"sku\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"price\": 782.9579422837685,\n    \"stock\": 6292,\n    \"active\": false,\n    \"createdAt\": \"2016-12-06T05:39:53.365Z\"\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Crear un producto",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idCategory\": 19,\n  \"sku\": \"PC-001\",\n  \"name\": \"PC Gaming\",\n  \"description\": \"Ordenador gaming de alto rendimiento\",\n  \"price\": 999.99,\n  \"stock\": 10,\n  \"active\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "Crea un nuevo producto en la base de datos"
+              },
+              "response": [
+                {
+                  "name": "Producto creado correctamente",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/products",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "products"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}"
+                },
+                {
+                  "name": "Datos del producto incorrectos",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": 6968,\n  \"category\": {\n    \"id\": 1539,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"products\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n      }\n    ]\n  },\n  \"sku\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 5486.217638453907,\n  \"stock\": 3897,\n  \"active\": false,\n  \"createdAt\": \"2017-04-22T11:27:36.797Z\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/products",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "products"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

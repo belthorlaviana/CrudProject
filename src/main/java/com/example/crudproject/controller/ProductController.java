@@ -109,7 +109,9 @@ public class ProductController {
      * @return the response entity
      */
     @Operation(summary = "Eliminar un producto", description = "Elimina un producto de la base de datos")
-    @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "Producto eliminado correctamente"), @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Producto eliminado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado", content = @Content)})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
 
