@@ -1,5 +1,6 @@
 package com.example.crudproject.dto.response;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -8,7 +9,10 @@ import java.math.BigDecimal;
  * Datos de producto expuestos en las respuestas de la API.
  */
 @Data
+@Builder
 public class ProductDtoResponse {
+
+    private Long idProduct;
 
     private Long idCategory;
 

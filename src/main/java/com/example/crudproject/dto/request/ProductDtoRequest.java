@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 @Data
 public class ProductDtoRequest {
 
+    private Long idProduct;
+
     private Long idCategory;
 
     private String sku;

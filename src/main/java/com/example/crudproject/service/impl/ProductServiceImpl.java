@@ -1,16 +1,13 @@
 package com.example.crudproject.service.impl;
 
-import com.example.crudproject.Repository.ProductRepository;
 import com.example.crudproject.dto.request.ProductDtoRequest;
 import com.example.crudproject.dto.response.ProductDtoResponse;
-import com.example.crudproject.entity.Category;
-import com.example.crudproject.entity.Product;
 import com.example.crudproject.exceptions.ProductNotFoundException;
-import com.example.crudproject.mapper.ProductMapper;
-import com.example.crudproject.service.CategoryService;
 import com.example.crudproject.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,64 +16,109 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final List<ProductDtoResponse> dataList = new ArrayList<ProductDtoResponse>();
 
-    private final CategoryService categoryService;
+    public ProductServiceImpl() {
 
-    private final ProductMapper productMapper;
+        dataList.add(ProductDtoResponse.builder()
+                .idProduct(1L)
+                .idCategory(1L)
+                .sku("PROD001")
+                .name("Teclado")
+                .description("Teclado mecánico")
+                .price(new BigDecimal("49.99"))
+                .stock(10)
+                .active(true)
+                .build());
 
-    public ProductServiceImpl(ProductRepository productRepository, CategoryService categoryService, ProductMapper productMapper) {
-        this.productRepository = productRepository;
-        this.categoryService = categoryService;
-        this.productMapper = productMapper;
+        dataList.add(ProductDtoResponse.builder()
+                .idProduct(2L)
+                .idCategory(1L)
+                .sku("PROD002")
+                .name("Ratón")
+                .description("Ratón inalámbrico")
+                .price(new BigDecimal("19.99"))
+                .stock(25)
+                .active(true)
+                .build());
+
+        dataList.add(ProductDtoResponse.builder()
+                .idProduct(3L)
+                .idCategory(2L)
+                .sku("PROD003")
+                .name("Monitor")
+                .description("Monitor de 27 pulgadas")
+                .price(new BigDecimal("199.99"))
+                .stock(5)
+                .active(true)
+                .build());
     }
 
     @Override
     public ProductDtoResponse create(ProductDtoRequest productDto) {
 
-        Category category = categoryService.findById(productDto.getIdCategory());
-        Product product = productMapper.toEntity(productDto, category);
-        Product savedProduct = productRepository.save(product);
-        return productMapper.toDto(savedProduct);
+        ProductDtoResponse data = ProductDtoResponse.builder()
+                .idProduct(productDto.getIdProduct())
+                .idCategory(productDto.getIdCategory())
+                .sku(productDto.getSku())
+                .name(productDto.getName())
+                .description(productDto.getDescription())
+                .price(productDto.getPrice())
+                .stock(productDto.getStock())
+                .active(productDto.getActive())
+                .build();
+
+        dataList.add(data);
+
+        return data;
     }
 
     @Override
     public List<ProductDtoResponse> findAll() {
 
-        return productRepository.findAll().stream()
-                .map(productMapper::toDto)
-                .toList();
+        return dataList;
     }
 
     @Override
     public ProductDtoResponse findById(Long id) {
-        return productRepository.findById(id)
-                .map(productMapper::toDto)
+
+        return dataList.stream()
+                .filter(product -> product.getIdProduct().equals(id))
+                .findFirst()
                 .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @Override
     public ProductDtoResponse update(Long id, ProductDtoRequest productDto) {
 
-        Product existingProduct = productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+        ProductDtoResponse existingProduct = findById(id);
 
-        Category category = categoryService.findById(productDto.getIdCategory());
+        if (null != existingProduct) {
+            ProductDtoResponse updatedProduct = ProductDtoResponse.builder()
+                    .idProduct(existingProduct.getIdProduct())//EL ID DELPRODUCTO NO SE PUEDE CAMBIAR, SE MANTIENE EL ID DEL PRODUCTO EXISTENTE
+                    .idCategory(productDto.getIdCategory())
+                    .sku(productDto.getSku())
+                    .name(productDto.getName())
+                    .description(productDto.getDescription())
+                    .price(productDto.getPrice())
+                    .stock(productDto.getStock())
+                    .active(productDto.getActive())
+                    .build();
 
-        productMapper.toUpdatedEntity(productDto, existingProduct);
-        existingProduct.setCategory(category);
+            int index = dataList.indexOf(existingProduct);
+            dataList.set(index, updatedProduct);
 
-        Product updatedProduct = productRepository.save(existingProduct);
-        return productMapper.toDto(updatedProduct);
+            return updatedProduct;
+        }
+
+        return null;
+
     }
 
     @Override
     public void delete(Long id) {
 
-        if (!productRepository.existsById(id)) {
-            throw new ProductNotFoundException(id);
-        }
-
-        productRepository.deleteById(id);
+        ProductDtoResponse product = findById(id);
+        dataList.remove(product);
     }
 }
